@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+
+      <!-- Ролл -->
+
+      <div class="col-md-6">
+
+         <form id="form_buying_product" method="POST" class="form-inline" action="{% url 'basket_adding' %}">
+            {% csrf_token %}
+
+            <div class="card mb-4" data-id="{{ product.id }}">
+               <img src="{{ product.main_image.image.url }}" class="product-img" alt="">
+               <div class="card-body text-center">
+                  <h4 id="user_name_input" class="item-title">{{ product.name }}</h4>
+                  <p><small data-items-in-box class="text-muted">6 шт.</small></p>
+
+                  <div class="details-wrapper">
+                     <div class="items counter-wrapper">
+                        <input type="number" class="items__current" min="1" name="number" id="number">
+                        <!-- <div class="items__control" data-action="minus">-</div>
+                        <div class="items__current" name="number" id="number" data-counter>1</div>
+                        <div class="items__control" data-action="plus">+</div> -->
+                     </div>
+                     
+                     <div class="price">
+                        <div class="price__weight">180г.</div>
+                        <div class="price__currency">{{ product.price }}</div>
+                     </div>
+                  </div>
+            
+                  <button data-cart type="submit" id="submit_btn" class="btn btn-block btn-outline-warning"
+                  data-product_id = "{{ product.id }}"
+                  data-image = "{{ product.main_image.image.url }}"
+                  data-name = "{{ product.name }}"
+                  data-price = "{{ product.price }}"
+                  >+ в корзину</button>
+
+               </div>
+            </div>
+         </form> 
+      </div>
+    
+      <!-- // Ролл -->
+      
+      <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+      <!-- Latest compiled and minified JavaScript -->
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+     
+     
+
+{% endblock %}

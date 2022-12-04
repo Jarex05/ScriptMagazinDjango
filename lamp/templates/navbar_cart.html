@@ -1,0 +1,115 @@
+{% load static %}
+
+<!-- Корзина -->
+   <div class="card mb-4">
+         <div class="card-body">
+            <h5 class="card-title">Ваши заказы <span id="basket_total_nmb">
+               {% if products_total_nmb %}
+                  ({{ products_total_nmb }})
+               {% else %}
+                  (0)
+               {% endif %} 
+            </span></h4>
+            
+            <div data-cart-empty class="alert alert-secondary" role="alert">
+               Корзина пуста
+            </div>
+            
+            
+                  <!-- cart-wrapper -->
+                  <div class="cart-wrapper">
+                        {% for product_in_basket in products_in_basket %}
+                                 <div class="cart-item">
+                                    <div class="cart-item__top">
+                                    <div class="cart-item__img">
+                                       <img src="{{ product_in_basket.product.main_image.image.url }}" alt="">
+                                    </div>
+                                    <div class="cart-item__desc">
+                                       <div class="cart-item__title">{{ product_in_basket.product.name }}</div>
+                                       <div class="cart-item__weight">6 шт. / 205г.</div>
+                              
+                                       
+                                       <div class="cart-item__details">
+                              
+                                          <div class="items items--small counter-wrapper">
+                                                <div class="items__control" data-action="minus">-</div>
+                                                <div class="items__current" data-counter="">{{ product_in_basket.nmb }}</div>
+                                                <div class="items__control" data-action="plus">+</div>
+                                          </div>
+                              
+                                          <div class="price">
+                                                <div class="price__currency">{{ product_in_basket.price_per_item }} ₽</div>
+                                          </div>
+                                          
+                                       </div>
+                                    </div>
+                                    <a href="" class="delete-item" data-product_id="{{ product_in_basket.id }}">x</a>
+                                    </div>
+                                    
+                              </div>
+                        {% endfor %}
+                  </div>
+                  <!-- // cart-wrapper -->
+            
+                  <!-- Стоимость заказа -->
+                  <div class="cart-total">
+                     <p><span class="h5">Доставка:</span> <span class="delivery-cost free">бесплатно</span> </p>
+                     <p><span class="h5">Итого:</span> <span class="total-price" id="basket_total_amount">
+                        {% if products_total_nmb %}
+                           {{ order_total_price }}
+                        {% else %}
+                           0
+                        {% endif %}
+                     </span> <span class="rouble">₽</span></p>
+                  </div>
+                  <!-- // Стоимость заказа -->
+
+         </div>
+
+         <!-- Оформить заказ -->
+         <div id="order-form" class="card-body border-top">
+            <h5 class="card-title">Оформить заказ</h4>
+            <form>
+               <div class="form-group">
+                  <input type="text" class="form-control" placeholder="Ваш номер телефона">
+               </div>
+               <button type="submit" class="btn btn-primary">Заказать</button>
+            </form>
+         </div>
+         <!-- // Оформить заказ -->
+
+   </div>
+ <!-- // Корзина -->
+
+
+
+ <!-- Cart item -->
+ <!-- <div class="cart-item">
+   <div class="cart-item__top">
+      <div class="cart-item__img">
+         <img src="" alt="">
+      </div>
+      <div class="cart-item__desc">
+         <div class="cart-item__title">Калифорния темпура</div>
+         <div class="cart-item__weight">6 шт. / 205г.</div>
+
+         
+         <div class="cart-item__details">
+
+            <div class="items items--small counter-wrapper">
+               <div class="items__control" data-action="minus">-</div>
+               <div class="items__current" data-counter="">1</div>
+               <div class="items__control" data-action="plus">+</div>
+            </div>
+
+            <div class="price">
+               <div class="price__currency">250 ₽</div>
+            </div>
+
+         </div>
+         
+
+      </div>
+   </div>
+</div> -->
+<!-- // Cart item -->

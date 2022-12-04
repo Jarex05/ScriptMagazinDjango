@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+
+      <!-- Ролл -->
+
+
+      {% for product_image in products_images %}
+
+     
+            
+      <div class="col-md-6">
+
+         <form id="form_buying_product" method="POST" class="form-inline" action="{% url 'basket_adding' %}">
+            {% csrf_token %}
+
+            <div class="card mb-4 form_buying_product" data-id="{{ product_image.product.id }}">
+               <img src="{{ product_image.image.url }}" class="product-img" alt="">
+               <div class="card-body text-center">
+                  <h4 id="user_name_input" class="item-title"><a href="{% url 'product' product_image.product.id %}">{{ product_image.product.name }}</a></h4>
+                  <p><small data-items-in-box class="text-muted">6 шт.</small></p>
+
+                  <div class="details-wrapper">
+                     <div class="items counter-wrapper">
+                        <input type="number" class="items__current" name="number" min="1" id="number">                                                     
+                        <!-- <div class="items__control" data-action="minus">-</div>
+                        <div class="items__current" data-counter>1</div>
+                        <div class="items__control" data-action="plus">+</div> -->
+                     </div>
+
+                     <div class="price">
+                        <div class="price__weight">180г.</div>
+                        <div class="price__currency">{{ product_image.product.price }}</div>
+                     </div>
+                  </div>
+            
+                  <button data-cart type="submit" id="submit_btn" class="btn btn-block btn-outline-warning"
+                     data-product_id = "{{ product_image.product.id }}"
+                     data-image = "{{ product_image.image.url }}"
+                     data-name = "{{ product_image.product.name }}"
+                     data-price = "{{ product_image.product.price }}"
+                  >+ в корзину</button>
+
+               </div>
+            </div>
+         </form>
+      </div>
+    
+      {% endfor %}
+      <!-- // Ролл -->
+
+{% endblock %}
