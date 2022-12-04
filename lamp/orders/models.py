@@ -3,7 +3,7 @@ from products.models import Product, ProductImage
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 
-# Create your models here.
+# Create your models here.1
 
 class Status(models.Model):
     name = models.CharField(max_length=24, blank=True, null=True, default=None)   # Название статуса
