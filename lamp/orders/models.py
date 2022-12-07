@@ -100,7 +100,7 @@ class ProductInBasket(models.Model):
     nmb = models.IntegerField(default=1)                                                                 # Колличество продуктов в корзине
     price_per_item = models.DecimalField(max_digits=10, decimal_places=2, default=0)                     # Цена за еденицу в корзине
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)#price*nmb              # Общая цена продуктов в корзине
-    is_active = models.BooleanField(default=True)                                                        # Включение и отключение активной корзины.
+    is_active = models.BooleanField(default=True)                                                        # Включение и отключение активной корзины
     created = models.DateTimeField(auto_now_add=True, auto_now=False)
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
 
