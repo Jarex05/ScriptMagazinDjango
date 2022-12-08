@@ -2,7 +2,8 @@ $(document).ready(function () {
     var form = $("#form_buying_product");
     console.log(form);
     var cartEmptyBadge = document.querySelector('[data-cart-empty]');
-
+    var cartEmptyBadgeInit = document.querySelector('[data-cart-empty_init]');
+    console.log(cartEmptyBadge)
     function basketUpdating(product_id, nmb, is_delete) {
         var data = {};
         data.product_id = product_id;
@@ -26,7 +27,10 @@ $(document).ready(function () {
                 console.log(data.products_total_nmb);
                 if (data.products_total_nmb || data.products_total_nmb == 0) {
                     $('#basket_total_nmb').text("(" + data.products_total_nmb + ")");
-                    $('#basket_total_amount').text(  data.order_total_price );
+                    if (data.products_total_nmb == 0) {
+                        console.log('Есть1')
+                    }
+                    $('#basket_total_amount').text( data.order_total_price );
                     console.log(data.products.length);
                     $('.cart-wrapper').html("");
                     
@@ -63,10 +67,14 @@ $(document).ready(function () {
                                     
                                 });
                                 if(data.products.length > 0) {
+                                    cartEmptyBadgeInit.classList.add('none');
                                     cartEmptyBadge.classList.add('none');
                                 } else {
-                                    cartEmptyBadge.classList.remove('none');
+                                    cartEmptyBadgeInit.classList.remove('none');
+                                    cartEmptyBadge.classList.add('none');
                                 }
+
+                                
                           
                 }
             },
@@ -75,6 +83,7 @@ $(document).ready(function () {
             }
         })
     }
+
     $(document).on('click', "#submit_btn", function(e) {
         e.preventDefault();
         var nmb = $(this).closest(".card").find('#number').val();
@@ -87,7 +96,6 @@ $(document).ready(function () {
         console.log(product_name);
         console.log(nmb);
         console.log(product_price);
-        
         basketUpdating(product_id, nmb, is_delete=false)
 
     });

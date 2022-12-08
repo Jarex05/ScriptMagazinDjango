@@ -6,15 +6,21 @@
             <h5 class="card-title">Ваши заказы <span id="basket_total_nmb">
                {% if products_total_nmb %}
                   ({{ products_total_nmb }})
-
+               
                {% else %}
-                  (0)
+               (0)
                {% endif %} 
-            </span></h5>
+               </span>
+            </h5>
+            
+            <div data-cart-empty_init id="alert" class="alert alert-secondary none" role="alert">
+               Корзина пуста
+            </div>
+            
 
             {% if products_total_nmb == 0 %}
 
-                  <div data-cart-empty class="alert alert-secondary" role="alert">
+                  <div data-cart-empty id="alert1" class="alert alert-secondary" role="alert">
                      Корзина пуста
                   </div>
 
@@ -81,7 +87,6 @@
             </form>
          </div>
          <!-- // Оформить заказ -->
-
    </div>
  <!-- // Корзина -->
 
