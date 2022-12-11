@@ -4,6 +4,7 @@ $(document).ready(function () {
     var cartEmptyBadge = document.querySelector('[data-cart-empty]');
     var cartEmptyBadgeInit = document.querySelector('[data-cart-empty_init]');
     console.log(cartEmptyBadge)
+    
     function basketUpdating(product_id, nmb, is_delete) {
         var data = {};
         data.product_id = product_id;

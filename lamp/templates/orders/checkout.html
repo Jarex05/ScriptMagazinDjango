@@ -1,7 +1,7 @@
-{% extends 'base.html' %}
+{% extends 'base_checkout.html' %}
 {% load static %}
 
-{% block content %}
+{% block content_checout %}
     <div class="container">
         <div class="row">
             {% if products_in_basket %}
@@ -36,6 +36,7 @@
                                         <th>Колличество</th>
                                         <th>Цена за еденицу</th>
                                         <th>Общая цена</th>
+                                        <th>Удалить</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -60,6 +61,11 @@
                                             <td>
                                                 <span class="total-product-in-basket-amount">
                                                     {{ product_in_basket.total_price }}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                <span>
+                                                    <a href="{% url 'product_remove_checkout' product_id=product_in_basket.id %}" href="">Удалить</a>
                                                 </span>
                                             </td>
                                         </tr>

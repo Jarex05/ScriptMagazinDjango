@@ -3,6 +3,10 @@ from .models import ProductInBasket, Order, ProductInOrder
 from django.shortcuts import render
 from .forms import CheckoutContactForm
 from django.contrib.auth.models import User
+from django.views.generic import View
+from django.shortcuts import get_object_or_404
+from django.shortcuts import redirect
+from django.urls import reverse
 
 
 def basket_adding(request):
@@ -80,3 +84,10 @@ def checkout(request):
         else:
             print("no")
     return render(request, 'orders/checkout.html', locals())
+
+
+
+def product_remove_checkout(request, product_id):
+    product_in_basket = get_object_or_404(ProductInBasket, id=product_id)
+    product_in_basket.delete()
+    return redirect('checkout')
