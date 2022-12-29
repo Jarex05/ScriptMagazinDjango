@@ -4,7 +4,8 @@ from django.db import models
 class Product(models.Model):
     name = models.CharField(max_length=64, blank=True, null=True, default=None) # Название продукта
     price = models.DecimalField(max_digits=10, decimal_places=2, default=0)     # Цена за еденицу
-    nmb = models.IntegerField(default=1)                                        # Выбор колличества
+    nmb = models.IntegerField(default=0)                                        # Выбор колличества
+    quantity_in_stock = models.IntegerField(default=0)                          # Количество товара на складе
     short_descpription = models.TextField(blank=True, null=True, default=None)  # Короткое описание продукта
     description = models.TextField(blank=True, null=True, default=None)         # Полное описание продукта
     is_active = models.BooleanField(default=True)                               # Включение и отключени продукта для отображения на сайте

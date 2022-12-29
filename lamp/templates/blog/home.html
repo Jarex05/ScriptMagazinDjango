@@ -20,28 +20,40 @@
                <img src="{{ product_image.image.url }}" class="product-img" alt="">
                <div class="card-body text-center">
                   <h4 id="user_name_input" class="item-title"><a href="{% url 'product' product_image.product.id %}">{{ product_image.product.name }}</a></h4>
-                  <p><small data-items-in-box class="text-muted">6 шт.</small></p>
-
+                  
+                  <!-- <p class="quantity"><small id="quantity" data-items-in-box class="text-muted">{{ product_image.product.quantity_in_stock }} шт.</small></p> -->
+                  
                   <div class="details-wrapper">
-                     <div class="items counter-wrapper">
-                        <input type="number" class="items__current" name="number" min="1" id="number">                                                     
-                        <!-- <div class="items__control" data-action="minus">-</div>
-                        <div class="items__current" data-counter>1</div>
-                        <div class="items__control" data-action="plus">+</div> -->
-                     </div>
+
+                     <!-- <div class="items counter-wrapper"> -->
+                        {% if product_image.product.quantity_in_stock > 0 %}
+                        <!-- <input type="number" class="items__current" name="number" min="1" max="{{ product_image.product.nmb }}" id="number"> -->
+                        <button type="button" onclick="this.nextElementSibling.stepDown()">-</button>
+                        <input type="number" id="number" name="number" min="1" max="{{ product_image.product.quantity_in_stock }}" value="1" readonly class="raz">
+                        <button type="button" id="previousElementSibling" onclick="this.previousElementSibling.stepUp()">+</button>
+
+                        {% else %}
+                            0
+                        {% endif %}
+
+                     <!-- </div> -->
 
                      <div class="price">
                         <div class="price__weight">180г.</div>
                         <div class="price__currency">{{ product_image.product.price }}</div>
                      </div>
                   </div>
-            
+                  {% if product_image.product.quantity_in_stock > 0 %}
                   <button data-cart type="submit" id="submit_btn" class="btn btn-block btn-outline-warning"
                      data-product_id = "{{ product_image.product.id }}"
                      data-image = "{{ product_image.image.url }}"
                      data-name = "{{ product_image.product.name }}"
                      data-price = "{{ product_image.product.price }}"
+                     data-quantity = "{{ product_image.product.quantity_in_stock }}"
                   >+ в корзину</button>
+                  {% else %}
+                  Нет на складе
+                  {% endif %}
 
                </div>
             </div>

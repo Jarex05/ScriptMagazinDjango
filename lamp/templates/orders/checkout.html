@@ -51,7 +51,7 @@
                                                 {{ product_in_basket.product.name }}
                                             </td>
                                             <td>
-                                                <input value="{{ product_in_basket.nmb }}" min="1" type="number" class="product-in-basket-nmb" name="product_in_basket_{{ product_in_basket.id }}">
+                                                <input type="number" value="{{ product_in_basket.nmb }}" min="1" max="{{ product_in_basket.product.quantity_in_stock }}" class="product-in-basket-nmb" name="product_in_basket_{{ product_in_basket.id }}">
                                             </td>
                                             <td>
                                                 <span class="product-price">

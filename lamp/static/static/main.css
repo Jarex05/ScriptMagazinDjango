@@ -17,6 +17,16 @@ h3, h4 {
 	color: red;
 }
 
+.raz {
+	all: unset;
+	-moz-appearance: textfield;
+	width: 3em;
+	text-align: center;
+  }
+  .raz::-webkit-inner-spin-button { 
+	display: none;
+  }
+
 .product-img {
 	width: 265px;
 	height: auto;

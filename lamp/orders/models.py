@@ -98,6 +98,7 @@ class ProductInBasket(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE, blank=True, null=True, default=None)      # Связь с моделью заказов с корзиной
     product = models.ForeignKey(Product, on_delete=models.CASCADE, blank=True, null=True, default=None)  # Продукты в корзине
     nmb = models.IntegerField(default=1)                                                                 # Колличество продуктов в корзине
+    quantity = models.IntegerField(default=0)
     price_per_item = models.DecimalField(max_digits=10, decimal_places=2, default=0)                     # Цена за еденицу в корзине
     total_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)#price*nmb              # Общая цена продуктов в корзине
     is_active = models.BooleanField(default=True)                                                        # Включение и отключение активной корзины

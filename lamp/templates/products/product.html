@@ -16,7 +16,7 @@
                <img src="{{ product.main_image.image.url }}" class="product-img" alt="">
                <div class="card-body text-center">
                   <h4 id="user_name_input" class="item-title">{{ product.name }}</h4>
-                  <p><small data-items-in-box class="text-muted">6 шт.</small></p>
+                  <p><small data-items-in-box class="text-muted">{{ product.quantity_in_stock }} шт.</small></p>
 
                   <div class="details-wrapper">
                      <div class="items counter-wrapper">

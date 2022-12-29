@@ -1,14 +1,14 @@
 $(document).ready(function () {
     var form = $("#form_buying_product");
-    console.log(form);
+
     var cartEmptyBadge = document.querySelector('[data-cart-empty]');
     var cartEmptyBadgeInit = document.querySelector('[data-cart-empty_init]');
-    console.log(cartEmptyBadge)
     
-    function basketUpdating(product_id, nmb, is_delete) {
+    function basketUpdating(product_id, nmb, quantity, is_delete) {
         var data = {};
         data.product_id = product_id;
         data.nmb = nmb;
+        data.quantity = quantity;
         var csrf_token = $('#form_buying_product [name="csrfmiddlewaretoken"]').val();
         data["csrfmiddlewaretoken"] = csrf_token;
 
@@ -28,9 +28,6 @@ $(document).ready(function () {
                 console.log(data.products_total_nmb);
                 if (data.products_total_nmb || data.products_total_nmb == 0) {
                     $('#basket_total_nmb').text("(" + data.products_total_nmb + ")");
-                    if (data.products_total_nmb == 0) {
-                        console.log('Есть1')
-                    }
                     $('#basket_total_amount').text( data.order_total_price );
                     console.log(data.products.length);
                     $('.cart-wrapper').html("");
@@ -44,15 +41,17 @@ $(document).ready(function () {
                                                         </div>
                                                         <div class="cart-item__desc">
                                                             <div class="cart-item__title">` + v.name + `</div>
-                                                            <div class="cart-item__weight">6 шт. / 205г.</div>
+                                                            <div class="cart-item__weight">` + v.quantity + ` шт. ост. на складе.</div>
                                                             
                                                                     
                                                             <div class="cart-item__details">
                                                             
                                                                 <div class="items items--small counter-wrapper">
+
                                                                     <div class="items__control" data-action="minus">-</div>
                                                                     <div class="items__current" data-counter="">` + v.nmb + `</div>
                                                                     <div class="items__control" data-action="plus">+</div>
+                                                                    
                                                                 </div>
                                                             
                                                                 <div class="price">
@@ -65,16 +64,30 @@ $(document).ready(function () {
                                                         </div>
                                                                 
                                                     </div>`)
+                                    $('.quantity').html("");
+                                    $('.quantity').append(`<small id="quantity" data-items-in-box 
+                                                            quantity_name="{{ product_image.product.quantity_in_stock }}" 
+                                                            class="text-muted">` + v.quantity + ` шт.
+                                                            </small>`);
                                     
                                 });
+
                                 if(data.products.length > 0) {
                                     cartEmptyBadgeInit.classList.add('none');
-                                    cartEmptyBadge.classList.add('none');
+                                    if (cartEmptyBadge == null) {
+                                        console.log("");
+                                    } else {
+                                        cartEmptyBadge.classList.add('none');
+                                    }
+
                                 } else {
                                     cartEmptyBadgeInit.classList.remove('none');
-                                    cartEmptyBadge.classList.add('none');
+                                    if (cartEmptyBadge == null) {
+                                        console.log("");
+                                    } else {
+                                        cartEmptyBadge.classList.add('none');
+                                    }
                                 }
-
                                 
                           
                 }
@@ -85,10 +98,17 @@ $(document).ready(function () {
         })
     }
 
+    // $(document).on('click', "#previousElementSibling", function(e) {
+    //     e.preventDefault();
+    //     window.location.reload();
+    //     console.log("click")
+    // });
+
     $(document).on('click', "#submit_btn", function(e) {
         e.preventDefault();
         var nmb = $(this).closest(".card").find('#number').val();
-        var product_image = $(this).data("image");
+        var quantity = $(this).data('quantity');
+        var product_image = $(this).data('image');
         var product_id = $(this).data('product_id');
         var product_name =  $(this).data('name');
         var product_price =  $(this).data('price');
@@ -96,8 +116,10 @@ $(document).ready(function () {
         console.log(product_image);
         console.log(product_name);
         console.log(nmb);
+        console.log(quantity)
         console.log(product_price);
-        basketUpdating(product_id, nmb, is_delete=false)
+
+        basketUpdating(product_id, nmb, quantity, is_delete=false)
 
     });
 
@@ -105,7 +127,8 @@ $(document).ready(function () {
         e.preventDefault();
         product_id = $(this).data("product_id");
         nmb = 0;
-        basketUpdating(product_id, nmb, is_delete=true)
+        quantity = 0;
+        basketUpdating(product_id, nmb, quantity, is_delete=true)
     });
 
     function calculatingBasketAmount() {
