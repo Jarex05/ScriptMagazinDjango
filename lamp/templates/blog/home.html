@@ -9,10 +9,9 @@
 
       {% for product_image in products_images %}
 
-     
-            
-      <div class="col-md-6">
 
+      
+      <div class="col-md-6">
          <form id="form_buying_product" method="POST" class="form-inline" action="{% url 'basket_adding' %}">
             {% csrf_token %}
 
@@ -59,7 +58,7 @@
             </div>
          </form>
       </div>
-    
+   
       {% endfor %}
       <!-- // Ролл -->
 

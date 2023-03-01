@@ -1,0 +1,48 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+	<title>Магазин роллов</title>
+	<link rel="stylesheet" href="{% static 'static/libs/bootstrap/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'static/main.css' %}">
+	<link href="https://fonts.googleapis.com/css?family=Merriweather:300,400,400i,700&amp;subset=cyrillic-ext" rel="stylesheet">
+
+</head>
+
+<body>
+
+	{% include 'header.html' %}
+	<div class="container mb-5">
+		<div class="row">
+			<div class="col-md-8">
+				<div class="row">
+                 {% block content_checout %}
+
+                 {% endblock content_checout %}
+				</div>
+			</div>
+			<div class="col-md-4">
+
+				
+
+
+			</div>
+			 
+			
+		</div>
+	</div>
+
+	<!-- Подключаем скрипты -->
+	
+	<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+	
+	<script src="{% static 'js/scripts.js' %}"></script>
+	
+</body>
+
+</html>

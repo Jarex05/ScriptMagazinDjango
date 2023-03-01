@@ -20,7 +20,10 @@
 
                   <div class="details-wrapper">
                      <div class="items counter-wrapper">
-                        <input type="number" class="items__current" min="1" name="number" id="number">
+                        <!-- <input type="number" class="items__current" min="1" name="number" id="number"> -->
+                        <button type="button" onclick="this.nextElementSibling.stepDown()">-</button>
+                        <input type="number" id="number" name="number" min="1" max="{{ product_image.product.quantity_in_stock }}" value="1" readonly class="raz">
+                        <button type="button" id="previousElementSibling" onclick="this.previousElementSibling.stepUp()">+</button>
                         <!-- <div class="items__control" data-action="minus">-</div>
                         <div class="items__current" name="number" id="number" data-counter>1</div>
                         <div class="items__control" data-action="plus">+</div> -->
@@ -32,12 +35,17 @@
                      </div>
                   </div>
             
-                  <button data-cart type="submit" id="submit_btn" class="btn btn-block btn-outline-warning"
-                  data-product_id = "{{ product.id }}"
-                  data-image = "{{ product.main_image.image.url }}"
-                  data-name = "{{ product.name }}"
-                  data-price = "{{ product.price }}"
-                  >+ в корзину</button>
+                  {% if product.quantity_in_stock > 0 %}
+                     <button data-cart type="submit" id="submit_btn" class="btn btn-block btn-outline-warning"
+                     data-product_id = "{{ product.id }}"
+                     data-image = "{{ product.main_image.image.url }}"
+                     data-name = "{{ product.name }}"
+                     data-price = "{{ product.price }}"
+                     data-quantity = "{{ product.quantity_in_stock }}"
+                     >+ в корзину</button>
+                  {% else %}
+                  Нет на складе
+                  {% endif %}
 
                </div>
             </div>
